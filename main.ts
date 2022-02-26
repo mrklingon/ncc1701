@@ -5,9 +5,9 @@ namespace SpriteKind {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     droid += 1
     if (droid == 1) {
-        enterprise.sayText("..M4 Activated", 500, true)
+        enterprise.sayText("..M5 Activated", 500, true)
     } else {
-        enterprise.sayText("..M4 De-Activated", 500, true)
+        enterprise.sayText("..M5 De-Activated", 500, true)
         droid = 0
     }
 })
@@ -35,6 +35,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.rock, function (sprite, otherSpr
 })
 function Phaser () {
     zap = sprites.createProjectileFromSprite(assets.image`Phaser`, enterprise, 0, -200)
+    music.pewPew.play()
     zap.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.phenom, function (sprite, otherSprite) {
@@ -47,6 +48,7 @@ let nurock: Sprite = null
 let zap: Sprite = null
 let enterprise: Sprite = null
 let droid = 0
+game.splash("Clear the space lanes!", "The Enterprise needs to clear the obstacles. Press \"B\" for M4.")
 droid = 0
 scene.setBackgroundColor(15)
 effects.starField.startScreenEffect()
