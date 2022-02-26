@@ -48,7 +48,7 @@ let nurock: Sprite = null
 let zap: Sprite = null
 let enterprise: Sprite = null
 let droid = 0
-game.splash("Clear the space lanes!", "The Enterprise needs to clear the obstacles. Press \"B\" for M4.")
+game.splash("Clear the space lanes!", "The Enterprise needs to clear the obstacles. Press \"B\" for M5.")
 droid = 0
 scene.setBackgroundColor(15)
 effects.starField.startScreenEffect()
