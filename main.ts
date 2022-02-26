@@ -2,6 +2,15 @@ namespace SpriteKind {
     export const rock = SpriteKind.create()
     export const phenom = SpriteKind.create()
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    droid += 1
+    if (droid == 1) {
+        enterprise.sayText("..M4 Activated", 500, true)
+    } else {
+        enterprise.sayText("..M4 De-Activated", 500, true)
+        droid = 0
+    }
+})
 sprites.onOverlap(SpriteKind.rock, SpriteKind.rock, function (sprite, otherSprite) {
     music.knock.play()
     sprite.destroy(effects.fire, 500)
@@ -37,6 +46,8 @@ let nebula: Sprite = null
 let nurock: Sprite = null
 let zap: Sprite = null
 let enterprise: Sprite = null
+let droid = 0
+droid = 0
 scene.setBackgroundColor(15)
 effects.starField.startScreenEffect()
 enterprise = sprites.create(assets.image`EnterpriseShip`, SpriteKind.Player)
@@ -54,9 +65,13 @@ assets.image`Asteroid3`
 forever(function () {
     pause(randint(500, 2000))
     nurock = sprites.create(rocks[randint(0, 4)], SpriteKind.rock)
-    nurock.setFlag(SpriteFlag.DestroyOnWall, true)
     nurock.setPosition(randint(0, 160), 0)
+    nurock.setFlag(SpriteFlag.DestroyOnWall, true)
     nurock.setVelocity(randint(-50, 50), randint(20, 200))
+    if (1 == droid) {
+        enterprise.x = nurock.x
+        Phaser()
+    }
 })
 forever(function () {
     pause(randint(500, 5000))
