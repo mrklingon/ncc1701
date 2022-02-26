@@ -69,6 +69,7 @@ forever(function () {
     nurock = sprites.create(rocks[randint(0, 4)], SpriteKind.rock)
     nurock.setPosition(randint(0, 160), 0)
     nurock.setFlag(SpriteFlag.DestroyOnWall, true)
+    nurock.setFlag(SpriteFlag.AutoDestroy, true)
     nurock.setVelocity(randint(-50, 50), randint(20, 200))
     if (1 == droid) {
         enterprise.x = nurock.x
@@ -87,4 +88,5 @@ forever(function () {
     nebula.setPosition(9, randint(0, 10))
     nebula.setVelocity(randint(-50, 50), 0)
     nebula.setFlag(SpriteFlag.DestroyOnWall, true)
+    nebula.setFlag(SpriteFlag.AutoDestroy, true)
 })
