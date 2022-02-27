@@ -33,6 +33,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.rock, function (sprite, otherSpr
     pause(100)
     sprite.setImage(assets.image`EnterpriseShip`)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.phenom, function (sprite, otherSprite) {
+    sprite.setImage(assets.image`EnterpriseShipShields`)
+    music.knock.play()
+    scene.cameraShake(4, 500)
+    otherSprite.destroy(effects.fire, 500)
+    info.changeLifeBy(-1)
+    pause(100)
+    sprite.setImage(assets.image`EnterpriseShip`)
+})
 function Phaser () {
     zap = sprites.createProjectileFromSprite(assets.image`Phaser`, enterprise, 0, -200)
     music.pewPew.play()
@@ -64,6 +73,7 @@ assets.image`Asteroid1`,
 assets.image`Asteroid2`,
 assets.image`Asteroid3`
 ]
+let nebs = [assets.animation`NebAnim1`, assets.animation`NebAnim2`]
 forever(function () {
     pause(randint(500, 2000))
     nurock = sprites.create(rocks[randint(0, 4)], SpriteKind.rock)
@@ -81,12 +91,17 @@ forever(function () {
     nebula = sprites.create(assets.image`neb`, SpriteKind.phenom)
     animation.runImageAnimation(
     nebula,
-    assets.animation`myAnim`,
+    nebs[randint(0, 1)],
     200,
     true
     )
-    nebula.setPosition(9, randint(0, 10))
-    nebula.setVelocity(randint(-50, 50), 0)
     nebula.setFlag(SpriteFlag.DestroyOnWall, true)
     nebula.setFlag(SpriteFlag.AutoDestroy, true)
+    if (4 < randint(0, 10)) {
+        nebula.setPosition(9, randint(10, 30))
+        nebula.setVelocity(randint(5, 50), 0)
+    } else {
+        nebula.setPosition(151, randint(10, 30))
+        nebula.setVelocity(randint(-50, 5), 0)
+    }
 })
